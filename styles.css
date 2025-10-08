@@ -861,9 +861,10 @@ input[type="color"] {
     }
     
     .meniu {
-        flex-direction: row; /* Horizontaliai */
-        flex-wrap: wrap;
-        gap: 8px;
+        flex-direction: row;
+        flex-wrap: nowrap;                  /* neleisti kelti į naują eilutę */
+        white-space: nowrap;                /* neleisti laužyti žodžių */
+        gap: clamp(6px, 2vw, 12px);         /* mažesnis tarpas mažuose ekranuose */
         justify-content: center;
         width: 100%;
     }
@@ -873,9 +874,8 @@ input[type="color"] {
     }
     
     .meniu li a {
-        display: block;
-        padding: 8px 14px;
-        font-size: 14px;
+        padding: clamp(6px, 1.2vw, 8px) clamp(10px, 3vw, 14px);
+        font-size: clamp(12px, 2.8vw, 14px);/* šrifto dydis traukiasi su ekranu */
     }
     
     .hero {
@@ -967,7 +967,7 @@ input[type="color"] {
     
     .kainu-lentele,
     .palyginimo-lentele {
-        min-width: 600px;
+        min-width: 200px;
         font-size: 14px;
     }
     
@@ -1031,11 +1031,11 @@ input[type="color"] {
 /* 5. LABAI MAŽAS EKRANAS (<400px) - Mažesni iPhone */
 @media (max-width: 400px) {
     .logo h1 {
-        font-size: 16px;
+        font-size: 13px;
     }
     
     .meniu li a {
-        padding: 6px 10px;
+        padding: 6px 7px;
         font-size: 13px;
     }
     
@@ -1048,7 +1048,7 @@ input[type="color"] {
     }
     
     .main-content h2 {
-        font-size: 22px;
+        font-size: 16px;
     }
     
     .portfolio-item {
@@ -1062,4 +1062,27 @@ input[type="color"] {
     .overlay p {
         font-size: 13px;
     }
+    .lenteles-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .kainu-lentele,
+    .palyginimo-lentele {
+        width: 100%;
+        min-width: 0;
+        table-layout: fixed;
+        font-size: 12px;
+    }
+
+    .kainu-lentele th,
+    .kainu-lentele td,
+    .palyginimo-lentele th,
+    .palyginimo-lentele td {
+        padding: 8px 6px;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+
 }
