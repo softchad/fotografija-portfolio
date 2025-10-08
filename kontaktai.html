@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- HEADER -->
     <div id="pagrindinis-header">
         <header>
             <div class="logo">
@@ -24,7 +23,6 @@
         </header>
     </div>
 
-    <!-- CONTENT -->
     <main class="content-wrapper">
         <aside class="sidebar-kaire">
             <h3>Kontaktinė informacija</h3>
@@ -50,32 +48,23 @@
             <h2>Susisiekite su Mumis</h2>
             <p class="aprasymas">Užpildykite užsakymo formą ir mes su jumis susisieksime per 24 valandas!</p>
 
-            <!-- UŽSAKYMO FORMA - DABAR 2 STULPELIAI -->
             <form class="uzsakymo-forma" action="#" method="post">
                 
-                <!-- KAIRĖ KOLONĖLĖ -->
-                
-                <!-- VARDAS -->
                 <div class="forma-grupe">
                     <label for="vardas">Vardas ir Pavardė *</label>
                     <input type="text" id="vardas" name="vardas" required placeholder="Įveskite savo vardą">
                 </div>
 
-                <!-- EL. PAŠTAS -->
                 <div class="forma-grupe">
                     <label for="email">El. paštas *</label>
                     <input type="email" id="email" name="email" required placeholder="jusu@email.lt">
                 </div>
 
-                <!-- DEŠINĖ KOLONĖLĖ -->
-                
-                <!-- TELEFONAS -->
                 <div class="forma-grupe">
                     <label for="telefonas">Telefonas *</label>
                     <input type="tel" id="telefonas" name="telefonas" required placeholder="+370 600 00000">
                 </div>
 
-                <!-- PASLAUGA -->
                 <div class="forma-grupe">
                     <label for="paslauga">Pasirinkite paslaugą *</label>
                     <select id="paslauga" name="paslauga" required>
@@ -88,25 +77,21 @@
                     </select>
                 </div>
 
-                <!-- DATA -->
                 <div class="forma-grupe">
                     <label for="data">Pageidaujama data</label>
                     <input type="date" id="data" name="data">
                 </div>
 
-                <!-- LAIKAS -->
                 <div class="forma-grupe">
                     <label for="laikas">Pageidaujamas laikas</label>
                     <input type="time" id="laikas" name="laikas">
                 </div>
 
-                <!-- BIUDŽETAS -->
                 <div class="forma-grupe">
                     <label for="biudzetas">Biudžetas (€)</label>
                     <input type="number" id="biudzetas" name="biudzetas" min="0" step="50" placeholder="500">
                 </div>
 
-                <!-- RADIO BUTTONS -->
                 <div class="forma-grupe">
                     <label>Ar esate fotografavęsi pas mus anksčiau?</label>
                     <div class="radio-grupe">
@@ -121,7 +106,6 @@
                     </div>
                 </div>
 
-                <!-- CHECKBOXES - UŽima abu stulpelius -->
                 <div class="forma-grupe full-width">
                     <label>Papildomos paslaugos:</label>
                     <div class="checkbox-grupe">
@@ -144,26 +128,22 @@
                     </div>
                 </div>
 
-                <!-- TEKSTINIS LAUKAS - Užima abu stulpelius -->
                 <div class="forma-grupe full-width">
                     <label for="zinute">Papildoma informacija</label>
                     <textarea id="zinute" name="zinute" rows="5" placeholder="Parašykite savo pageidavimus, klausimus ar papildomą informaciją..."></textarea>
                 </div>
 
-                <!-- RANGE SLIDER -->
                 <div class="forma-grupe">
                     <label for="svarba">Užsakymo skubumas (1-10):</label>
                     <input type="range" id="svarba" name="svarba" min="1" max="10" value="5">
                     <span id="svarba-reiksme">5</span>
                 </div>
 
-                <!-- COLOR PICKER -->
                 <div class="forma-grupe">
                     <label for="spalva">Pageidaujama akcentinė spalva dizaine:</label>
                     <input type="color" id="spalva" name="spalva" value="#3498db">
                 </div>
 
-                <!-- SUTIKIMAS - Užima abu stulpelius -->
                 <div class="forma-grupe full-width">
                     <label class="checkbox-label">
                         <input type="checkbox" name="sutikimas" required>
@@ -171,7 +151,6 @@
                     </label>
                 </div>
 
-                <!-- MYGTUKAI - Užima abu stulpelius -->
                 <div class="forma-mygtukai">
                     <button type="submit" class="btn btn-primary">Siųsti užklausą</button>
                     <button type="reset" class="btn btn-secondary">Išvalyti formą</button>
@@ -188,7 +167,7 @@
             </div>
             <div class="duk-blokas">
                 <p><strong>Kiek laiko trunka montavimas?</strong></p>
-                <p>Paprastai 2-3 savaitės.</p>
+                <p>Paprastai 2-3 savaites.</p>
             </div>
             <div class="duk-blokas">
                 <p><strong>Ar fotografuojate užsienyje?</strong></p>
@@ -197,12 +176,10 @@
         </aside>
     </main>
 
-    <!-- FOOTER -->
     <footer>
         <p>&copy; 2025 Vytauto Petronio Fotografija. Visos teisės saugomos.</p>
     </footer>
 
-    <!-- SCRIPT RANGE SLIDER REIKŠMEI RODYTI -->
     <script>
         const rangeInput = document.getElementById('svarba');
         const rangeValue = document.getElementById('svarba-reiksme');

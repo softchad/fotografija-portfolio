@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- HEADER su navigacija -->
     <div id="pagrindinis-header">
         <header>
             <div class="logo">
@@ -24,7 +23,6 @@
         </header>
     </div>
 
-    <!-- HERO sekcija -->
     <section class="hero">
         <div class="hero-turinys">
             <h2>Profesionalios Fotografijos Paslaugos</h2>
@@ -32,9 +30,7 @@
         </div>
     </section>
 
-    <!-- CONTENT dalis (3 stulpeliai) -->
     <main class="content-wrapper">
-        <!-- Kairė kolonėlė -->
         <aside class="sidebar-kaire">
             <h3>Apie Studiją</h3>
             <div class="info-box">
@@ -50,7 +46,6 @@
             </div>
         </aside>
 
-        <!-- Pagrindinė kolonėlė -->
         <section class="main-content">
             <h2>Apie Mane</h2>
             <p class="aprasymas">Sveiki! Esu profesionalus fotografas Vytautas Petronis su <span class="akcentas">10 metų patirtimi</span>. Specializuojuosi vestuvių, portretų ir gamtos fotografijoje.</p>
@@ -59,27 +54,35 @@
                 <p>Kiekviena fotosesija man yra unikali istorija. Stengiuosi užfiksuoti natūralias emocijas ir sukurti nuotraukas, kurias norėsite saugoti amžinai.</p>
             </div>
 
-            <!-- Mini galerija -->
             <div class="mini-galerija">
-                <h3>Paskutiniai Darbai</h3>
+                <h3>Mūsų darbai</h3>
                 <div class="galerija-grid">
-                    <div class="galerija-item">
-                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="Vestuvės">
+                    <a href="portfolio.html" class="galerija-item">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400"
+                            alt="Vestuvės">
+                        <span class="rating-icon">💍</span>
                         <p>Vestuvės</p>
-                    </div>
-                    <div class="galerija-item">
-                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400" alt="Portretas">
+                    </a>
+
+                    <a href="portfolio.html" class="galerija-item">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400"
+                            alt="Portretas">
+                        <span class="rating-icon">📸</span>
                         <p>Portretas</p>
-                    </div>
-                    <div class="galerija-item">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400" alt="Gamta">
+                    </a>
+
+                    <a href="portfolio.html" class="galerija-item">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400"
+                            alt="Gamta">
+                        <span class="rating-icon">🌄</span>
                         <p>Gamta</p>
-                    </div>
+                    </a>
                 </div>
+            </div>
+
             </div>
         </section>
 
-        <!-- Dešinė kolonėlė -->
         <aside class="sidebar-desine">
             <h3>Specializacija</h3>
             <ul class="spec-list">
@@ -91,9 +94,9 @@
         </aside>
     </main>
 
-    <!-- FOOTER -->
     <footer>
         <p>&copy; 2025 Vytauto Petronio Fotografija. Visos teisės saugomos.</p>
     </footer>
+<script src="gallery-heart-modal.js"></script>
 </body>
 </html>

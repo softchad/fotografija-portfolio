@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- HEADER -->
     <div id="pagrindinis-header">
         <header>
             <div class="logo">
@@ -24,7 +23,6 @@
         </header>
     </div>
 
-    <!-- CONTENT -->
     <main class="content-wrapper">
         <aside class="sidebar-kaire">
             <h3>Kategorijos</h3>
@@ -35,28 +33,46 @@
 
         <section class="main-content">
             <h2>Mano Portfolio</h2>
-            <p class="aprasymas">Kiekviena nuotrauka pasakoja savo unikalią istoriją.</p>
+            <p class="aprasymas">Kiekviena nuotrauka pasakoja savo unikalią istoriją....</p>
 
-            <!-- Didelė galerija - 8 paveikslėliai -->
             <div class="portfolio-galerija">
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500" alt="Vestuvės 1">
-                    <div class="overlay">
-                        <h4>Vestuvės</h4>
-                        <p>Jono ir Marijos vestuvės</p>
-                    </div>
+                <img class="open-photo img-clickable"
+                    src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500"
+                    alt="Vestuvės 1"
+                    data-title="Jono ir Marijos akimirka"
+                    data-likes="12">
+                <span class="like-badge">0</span>
+                <span class="rating-icon">💍</span>
+                <div class="overlay">
+                    <h4>Vestuvės</h4>
+                    <p>Jono ir Marijos vestuvės</p>
+                </div>
                 </div>
 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500" alt="Vestuvės 2">
+                    <img class="open-photo img-clickable"
+                        src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500"
+                        alt="Vestuvės 2"
+                        data-title="Romantiškas momentas"
+                        data-likes="9">
+                    <span class="like-badge">0</span>
+                    <span class="rating-icon">❤️</span>
                     <div class="overlay">
                         <h4>Vestuvės</h4>
                         <p>Romantiškas momentas</p>
                     </div>
                 </div>
 
+
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500" alt="Portretas 1">
+                    <img class="open-photo img-clickable" 
+                    src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500" 
+                    alt="Portretas 1"
+                    data-title="Verslo portretas"
+                    data-likes="15">
+                    <span class="like-badge">0</span>
+                    <span class="rating-icon">👔</span>
                     <div class="overlay">
                         <h4>Portretas</h4>
                         <p>Verslo portretas</p>
@@ -64,7 +80,13 @@
                 </div>
 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500" alt="Portretas 2">
+                    <img class="open-photo img-clickable"
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500" 
+                    alt="Portretas 2"
+                    data-title="Studijinis portretas"
+                    data-likes="8">
+                    <span class="like-badge">0</span>
+                    <span class="rating-icon">📸</span>
                     <div class="overlay">
                         <h4>Portretas</h4>
                         <p>Studijinis portretas</p>
@@ -72,7 +94,13 @@
                 </div>
 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500" alt="Gamta 1">
+                    <img class="open-photo img-clickable"
+                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500" 
+                    alt="Gamta 1"
+                    data-title="Kalnų peizažas"
+                    data-likes="20">
+                    <span class="like-badge">0</span>
+                    <span class="rating-icon">🏔️</span>
                     <div class="overlay">
                         <h4>Gamta</h4>
                         <p>Kalnų peizažas</p>
@@ -80,7 +108,13 @@
                 </div>
 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=500" alt="Gamta 2">
+                    <img class="open-photo img-clickable"
+                    src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=500" 
+                    alt="Gamta 2"
+                    data-title="Saulėlydis prie jūros"
+                    data-likes="18">
+                    <span class="like-badge">0</span>
+                    <span class="rating-icon">🌅</span>
                     <div class="overlay">
                         <h4>Gamta</h4>
                         <p>Saulėlydis prie jūros</p>
@@ -88,7 +122,13 @@
                 </div>
 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=500" alt="Festuvalis">
+                    <img class="open-photo img-clickable"
+                    src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=500" 
+                    alt="Festuvalis"
+                    data-title="Muzikos festivalis"
+                    data-likes="11">
+                    <span class="like-badge">0</span>
+                    <span class="rating-icon">🎵</span>
                     <div class="overlay">
                         <h4>Renginiai</h4>
                         <p>Muzikos festivalis</p>
@@ -96,7 +136,13 @@
                 </div>
 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=500" alt="Koncertas">
+                    <img class="open-photo img-clickable"
+                    src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=500" 
+                    alt="Koncertas"
+                    data-title="Gyvas koncertas"
+                    data-likes="14">
+                    <span class="like-badge">0</span>
+                    <span class="rating-icon">🎤</span>
                     <div class="overlay">
                         <h4>Renginiai</h4>
                         <p>Koncertas</p>
@@ -122,9 +168,21 @@
         </aside>
     </main>
 
-    <!-- FOOTER -->
     <footer>
         <p>&copy; 2025 Vytauto Petronio Fotografija. Visos teisės saugomos.</p>
     </footer>
+    <div class="modal-backdrop" id="photoModal">
+    <div class="modal">
+        <div class="modal-bar">
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-actions">
+            <button class="like-btn" id="likeBtn">❤ <span class="like-count" id="likeCount">0</span></button>
+            <button class="modal-close" id="modalClose" aria-label="Uždaryti">✕</button>
+        </div>
+        </div>
+        <img id="modalImg" src="" alt="">
+        </div>
+    </div>
+<script src="js/gallery-heart-modal.js"></script>
 </body>
 </html>
