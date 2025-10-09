@@ -1,42 +1,81 @@
+/* ============================================================================
+   VYTAUTO PETRONIO FOTOGRAFIJA - STYLESHEET
+   Responsive fotografijos portfolio svetainė
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   CSS KINTAMIEJI (Custom Properties)
+   Centralizuoti dizaino tokenai nuosekliam stilizavimui
+   ---------------------------------------------------------------------------- */
 :root {
+    /* Gradientai - naudojami header'iams, mygtukams ir akcentams */
     --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
     --overlay-gradient: linear-gradient(transparent, rgba(102, 126, 234, 0.95));
     --light-overlay: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    --award-gradient: linear-gradient(135deg, #f39c12, #f1c40f);
+    --badge-gradient: linear-gradient(135deg, #ff6b6b, #ee5a6f);
     
+    /* Pagrindinės Spalvos */
     --primary-color: #667eea;
     --secondary-color: #764ba2;
     --accent-color: #e74c3c;
     --success-color: #27ae60;
+    --warning-color: #f39c12;
     --dark-color: #2c3e50;
+    
+    /* Teksto Spalvos */
     --text-color: #333;
     --text-light: #555;
     --text-muted: #777;
+    
+    /* Fono ir Rėmelio Spalvos */
     --border-color: #ecf0f1;
     --bg-light: #f8f9fa;
     --white: #ffffff;
     
+    /* Šešėliai - sluoksniuota gylio sistema */
     --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
     --shadow-md: 0 2px 10px rgba(0,0,0,0.08);
     --shadow-lg: 0 4px 15px rgba(0,0,0,0.1);
     --shadow-xl: 0 8px 25px rgba(0,0,0,0.15);
     --shadow-hover: 0 8px 25px rgba(0,0,0,0.2);
+    --shadow-badge: 0 4px 12px rgba(231,76,60,.4);
+    --shadow-award: 0 8px 25px rgba(243,156,18,0.4);
     
+    /* Animacijų Trukmės */
     --transition-fast: 0.3s;
     --transition-medium: 0.4s;
     --transition-slow: 0.5s;
     
+    /* Kraštų Suapvalinimai */
     --border-radius-sm: 8px;
     --border-radius-md: 12px;
     --border-radius-lg: 25px;
+    --border-radius-pill: 50px;
     
+    /* Tarpų Sistema */
     --spacing-xs: 8px;
     --spacing-sm: 12px;
     --spacing-md: 20px;
     --spacing-lg: 30px;
     --spacing-xl: 40px;
+    
+    /* Z-Index Skalė - organizuota sluoksniavimo sistema */
+    --z-base: 1;
+    --z-overlay: 5;
+    --z-badge: 15;
+    --z-badge-top: 20;
+    --z-badge-highest: 25;
+    --z-header: 1000;
+    --z-modal-backdrop: 9998;
+    --z-modal: 9999;
 }
 
+/* ----------------------------------------------------------------------------
+   RESET IR BAZINIAI STILIAI
+   Box-sizing border-box nuspėjamiems layout'ams
+   ---------------------------------------------------------------------------- */
 * {
     margin: 0;
     padding: 0;
@@ -47,7 +86,7 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Užkerta kelią horizontaliam scroll'ui */
     height: 100%;
 }
 
@@ -58,16 +97,21 @@ body {
     background-color: var(--bg-light);
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Sticky footer palaikymas */
 }
 
+/* ----------------------------------------------------------------------------
+   HEADER IR NAVIGACIJA
+   Sticky header su gradient fonu, z-index: 1000 aukščiausiam sluoksniui
+   Naudoja CSS kintamuosius nuosekliam temizavimui
+   ---------------------------------------------------------------------------- */
 #pagrindinis-header {
     background: var(--primary-gradient);
     color: var(--white);
-    padding: clamp(12px, 1.5vw, 20px) 0;
-    position: sticky;
+    padding: clamp(12px, 1.5vw, 20px) 0; /* Responsive padding */
+    position: sticky; /* Lieka viršuje scrollinant */
     top: 0;
-    z-index: 1000;
+    z-index: var(--z-header); /* Virš viso kito turinio naudojant kintamąjį */
     box-shadow: var(--shadow-md);
     width: 100%;
     flex-shrink: 0;
@@ -100,6 +144,7 @@ header {
     margin-left: 0;
 }
 
+/* Navigacijos Meniu - Flexbox horizontaliam išdėstymui */
 .meniu {
     display: flex;
     list-style: none;
@@ -116,9 +161,15 @@ header {
 .meniu li a:hover,
 .meniu li a.active {
     background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Subtilus pakėlimo efektas */
 }
 
+/* ----------------------------------------------------------------------------
+   HERO SEKCIJA
+   Viso pločio banner su background image overlay
+   Naudoja position: relative sluoksniuotam z-index turiniui
+   Daugiasluoksnis dizainas su plūduriuojančiu ženkleliu
+   ---------------------------------------------------------------------------- */
 .hero {
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
                 url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200') center/cover;
@@ -129,9 +180,10 @@ header {
     color: var(--white);
     text-align: center;
     flex-shrink: 0;
-    position: relative;
+    position: relative; /* Pozicionavimo kontekstas ::before pseudo-elementui */
 }
 
+/* Spalvotas overlay naudojant pseudo-elementą, z-index: 1 */
 .hero::before {
     content: '';
     position: absolute;
@@ -140,9 +192,35 @@ header {
     right: 0;
     bottom: 0;
     background: linear-gradient(45deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
-    z-index: 1;
+    z-index: 1; /* Virš fono, po turiniu */
 }
 
+/* Plūduriuojantis apdovanojimo ženklelis - overlapping elemento demonstracija */
+.hero::after {
+    content: '🏆 Metų fotografas 2024';
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    background: var(--award-gradient);
+    color: var(--dark-color);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-pill);
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: var(--shadow-award),
+                inset 0 -3px 8px rgba(0,0,0,0.1);
+    z-index: 3; /* Virš visų hero elementų */
+    transform: rotate(-8deg);
+    animation: float 3s ease-in-out infinite;
+    border: 3px solid rgba(255,255,255,0.3);
+}
+
+@keyframes float {
+    0%, 100% { transform: rotate(-8deg) translateY(0); }
+    50% { transform: rotate(-8deg) translateY(-10px); }
+}
+
+/* Hero teksto turinys, z-index: 2 kad atsirastų virš overlay */
 .hero-turinys {
     position: relative;
     z-index: 2;
@@ -161,25 +239,34 @@ header {
     text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
 }
 
+/* ----------------------------------------------------------------------------
+   PAGRINDINIS LAYOUT - CSS GRID
+   Trijų skiltų išdėstymas: kairė-sidebar (1.5fr), pagrindinis turinys (3.5fr), dešinė-sidebar (1.5fr)
+   Grid suteikia struktūrizuotą, responsive layout'ą
+   ---------------------------------------------------------------------------- */
 .content-wrapper {
     display: grid;
-    grid-template-columns: 1.5fr 3.5fr 1.5fr;
+    grid-template-columns: 1.5fr 3.5fr 1.5fr; /* Proporcinės skiltys */
     gap: 32px;
     padding: 48px 60px;
     max-width: 1920px;
     margin: 0 auto;
     width: 100%;
-    flex: 1 0 auto;
+    flex: 1 0 auto; /* Flex augimas sticky footer'iui */
 }
 
+/* ----------------------------------------------------------------------------
+   KAIRĖ SIDEBAR
+   Sticky pozicionavimas su z-index sluoksniavimui
+   ---------------------------------------------------------------------------- */
 .sidebar-kaire {
     background-color: var(--white);
     padding: 25px;
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-md);
     height: fit-content;
-    position: sticky;
-    top: 120px;
+    position: sticky; /* Lieka matoma scrollinant */
+    top: 120px; /* Offset nuo sticky header */
 }
 
 .sidebar-kaire h3 {
@@ -188,11 +275,12 @@ header {
     font-size: 20px;
 }
 
+/* Info dėžutė su kairiuoju rėmelio akcentu naudojant ::before pseudo-elementą */
 .info-box {
     background-color: var(--bg-light);
     padding: 15px;
     border-radius: var(--border-radius-sm);
-    position: relative;
+    position: relative; /* Pozicionavimo kontekstas ::before */
 }
 
 .info-box::before {
@@ -211,6 +299,7 @@ header {
     font-size: 14px;
 }
 
+/* Paprastas sąrašas su custom bullet naudojant ::before */
 .simple-list {
     list-style: none;
     padding: 0;
@@ -219,7 +308,7 @@ header {
 .simple-list li {
     padding: 8px 0;
     border-bottom: 1px solid var(--border-color);
-    position: relative;
+    position: relative; /* ::before pozicionavimui */
     padding-left: 20px;
 }
 
@@ -235,6 +324,10 @@ header {
     border-bottom: none;
 }
 
+/* ----------------------------------------------------------------------------
+   PAGRINDINIO TURINIO SRITIS
+   Pirminė turinio sekcija su antraštės pabraukimo efektu
+   ---------------------------------------------------------------------------- */
 .main-content {
     background-color: var(--white);
     padding: 40px;
@@ -243,6 +336,7 @@ header {
     position: relative;
 }
 
+/* Antraštė su animuotu pabraukimu naudojant ::after pseudo-elementą */
 .main-content h2 {
     color: var(--primary-color);
     margin-bottom: 20px;
@@ -269,6 +363,7 @@ header {
     color: var(--text-light);
 }
 
+/* Akcentuotas tekstas su pabraukimo efektu */
 .akcentas {
     color: var(--accent-color) !important;
     font-weight: bold;
@@ -292,6 +387,7 @@ span.akcentas {
     color: blue;
 }
 
+/* Info blokas su dekoratyvia ikona naudojant ::before */
 .info-blokas {
     background: var(--light-overlay);
     padding: 25px;
@@ -302,6 +398,7 @@ span.akcentas {
     overflow: hidden;
 }
 
+/* Didelė dekoratyvi ikona, z-index: 0 (fono sluoksnis) */
 .info-blokas::before {
     content: '📷';
     position: absolute;
@@ -312,11 +409,17 @@ span.akcentas {
     z-index: 0;
 }
 
+/* Teksto turinys, z-index: 1 (virš ikonos) */
 .info-blokas p {
     position: relative;
     z-index: 1;
 }
 
+/* ----------------------------------------------------------------------------
+   MINI GALERIJA - CSS GRID
+   Trijų skiltų grid išdėstymas galerijos elementams
+   Sudėtingi hover efektai su keliais z-index sluoksniais
+   ---------------------------------------------------------------------------- */
 .mini-galerija {
     margin-top: 40px;
 }
@@ -329,12 +432,13 @@ span.akcentas {
 
 .galerija-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* Vienodo pločio skiltys */
     gap: 20px;
 }
 
+/* Galerijos elementas su sluoksniuotais hover efektais */
 .galerija-item {
-    position: relative;
+    position: relative; /* Pozicionavimo kontekstas absolute vaikams */
     overflow: hidden;
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-lg);
@@ -344,7 +448,7 @@ span.akcentas {
 .galerija-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-xl);
-    z-index: 10;
+    z-index: 10; /* Pakyla virš bendramečių hover metu */
 }
 
 .galerija-item img {
@@ -354,6 +458,7 @@ span.akcentas {
     display: block;
 }
 
+/* Slankusis teksto overlay, z-index: 2 */
 .galerija-item p {
     position: absolute;
     bottom: 0;
@@ -363,16 +468,17 @@ span.akcentas {
     color: var(--white);
     padding: 15px;
     text-align: center;
-    transform: translateY(100%);
+    transform: translateY(100%); /* Paslėptas pagal nutylėjimą */
     transition: transform var(--transition-fast);
     font-weight: 600;
     z-index: 2;
 }
 
 .galerija-item:hover p {
-    transform: translateY(0);
+    transform: translateY(0); /* Išslenka į viršų hover metu */
 }
 
+/* Zoom ikonos efektas naudojant ::after, z-index: 3 (viršutinis sluoksnis) */
 .galerija-item::after {
     content: '🔍';
     position: absolute;
@@ -383,7 +489,7 @@ span.akcentas {
     opacity: 0;
     transition: all var(--transition-fast);
     z-index: 3;
-    pointer-events: none;
+    pointer-events: none; /* Neblokuoja paspaudimų */
 }
 
 .galerija-item:hover::after {
@@ -391,6 +497,10 @@ span.akcentas {
     opacity: 0.9;
 }
 
+/* ----------------------------------------------------------------------------
+   DEŠINĖ SIDEBAR
+   Gradient fonas su baltu tekstu, sticky pozicionavimas
+   ---------------------------------------------------------------------------- */
 .sidebar-desine {
     background: var(--primary-gradient);
     color: var(--white);
@@ -413,6 +523,7 @@ span.akcentas {
     margin-bottom: 10px;
 }
 
+/* Specializacijų sąrašas su varnelių ikonoms */
 .spec-list {
     list-style: none;
     padding: 0;
@@ -441,17 +552,22 @@ span.akcentas {
     transform: translateX(5px);
 }
 
+/* ----------------------------------------------------------------------------
+   FOOTER
+   Sticky footer su dekoratyvia viršutine linija
+   ---------------------------------------------------------------------------- */
 footer {
     background: var(--dark-gradient);
     color: var(--white);
     text-align: center;
     padding: 30px;
-    margin-top: auto;
+    margin-top: auto; /* Stumia į apačią */
     width: 100%;
     flex-shrink: 0;
     position: relative;
 }
 
+/* Dekoratyvi linija naudojant ::before */
 footer::before {
     content: '';
     position: absolute;
@@ -463,6 +579,10 @@ footer::before {
     background: var(--primary-gradient);
 }
 
+/* ----------------------------------------------------------------------------
+   PORTFOLIO GALERIJA - CSS GRID
+   Keturių skiltų grid su sudėtingais hover efektais ir z-index sluoksnyavimų
+   ---------------------------------------------------------------------------- */
 .portfolio-galerija {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -493,9 +613,10 @@ footer::before {
 }
 
 .portfolio-item:hover img {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Zoom efektas */
 }
 
+/* Dekoratyvus apskritimas, z-index: 8 */
 .portfolio-item::before {
     content: '';
     position: absolute;
@@ -516,6 +637,7 @@ footer::before {
     transform: scale(1.2) rotate(45deg);
 }
 
+/* Teksto overlay, z-index: 5 */
 .overlay {
     position: absolute;
     bottom: 0;
@@ -544,45 +666,49 @@ footer::before {
     color: #f0f0f0;
 }
 
-.like-badge{
-  position:absolute;
-  top:15px;
-  right:15px;
-  background:var(--accent-color);
-  color:var(--white);
-  padding:8px 16px;
-  border-radius:var(--border-radius-sm);
-  font-weight:bold;
-  font-size:14px;
-  z-index:20;
-  box-shadow:0 4px 12px rgba(231,76,60,.4);
-  display:flex;
-  align-items:center;
-  gap:6px;
-  transition:transform var(--transition-fast);
-  transform: rotate(-8deg);           
-  will-change: transform;
-}
-.like-badge::before{content:'❤';font-size:16px}
-
-.portfolio-item:hover .like-badge{
-  transform: rotate(0deg) scale(1.1);  
-}
-
-.galerija-item:hover .like-badge{
-  transform: rotate(0deg) scale(1.1);
-}
-
+/* ----------------------------------------------------------------------------
+   LIKE ŽENKLELIS IR REITINGO SISTEMA
+   Pozicionuota absolutely su aukštu z-index (15-20) viršutinio sluoksnio matomumui
+   Naudoja CSS kintamuosius nuosekliam temizavimui
+   ---------------------------------------------------------------------------- */
 .like-badge {
-  pointer-events: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--accent-color);
+    color: var(--white);
+    padding: var(--spacing-xs) 16px;
+    border-radius: var(--border-radius-sm);
+    font-weight: bold;
+    font-size: 14px;
+    z-index: var(--z-badge-top); /* Viršutinis sluoksnis naudojant kintamąjį */
+    box-shadow: var(--shadow-badge);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform var(--transition-fast);
+    transform: rotate(-8deg); /* Žaismingas pasvirimas */
+    will-change: transform;
+    pointer-events: none; /* Neblokuoja paspaudimų */
 }
 
+.like-badge::before {
+    content: '❤';
+    font-size: 16px;
+}
+
+.portfolio-item:hover .like-badge,
+.galerija-item:hover .like-badge {
+    transform: rotate(0deg) scale(1.1);
+}
+
+/* Reitingo ikona, z-index: 15 */
 .rating-icon {
     position: absolute;
     top: 10px;
     left: 10px;
     font-size: 32px;
-    z-index: 15;
+    z-index: var(--z-badge); /* Naudojant CSS kintamąjį */
     opacity: 0;
     transform: scale(0) rotate(-45deg);
     transition: all var(--transition-medium);
@@ -594,6 +720,59 @@ footer::before {
     transform: scale(1) rotate(0deg);
 }
 
+/* ----------------------------------------------------------------------------
+   SUDĖTINGA OVERLAPPING ŽENKLELIŲ SISTEMA
+   Daugiasluoksnis ženklelis su šešėliu, backdrop, ir įdėtais elementais
+   Demonstruoja išplėstinę z-index ir position manipuliaciją
+   ---------------------------------------------------------------------------- */
+.portfolio-item::after {
+    content: 'NAUJAS';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--badge-gradient);
+    color: var(--white);
+    padding: 6px 14px;
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+    z-index: var(--z-badge-highest); /* Virš like ženklelio naudojant kintamąjį */
+    box-shadow: 0 4px 12px rgba(255,107,107,0.5),
+                inset 0 -2px 4px rgba(0,0,0,0.2);
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all var(--transition-fast);
+}
+
+.portfolio-item:nth-child(1)::after,
+.portfolio-item:nth-child(3)::after {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Fotografo watermark - subtilus overlay elementas */
+.portfolio-item .watermark {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.6);
+    background: rgba(0,0,0,0.3);
+    padding: 4px var(--spacing-xs);
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    z-index: 6; /* Virš vaizdo, po overlay */
+    font-family: monospace;
+    letter-spacing: 1px;
+    pointer-events: none;
+}
+
+/* ----------------------------------------------------------------------------
+   STATISTIKOS ELEMENTAI
+   Animuotas fono blizgesio efektas naudojant ::before pseudo-elementą
+   ---------------------------------------------------------------------------- */
 .stat-item {
     background-color: rgba(255,255,255,0.1);
     padding: 20px;
@@ -605,6 +784,7 @@ footer::before {
     overflow: hidden;
 }
 
+/* Blizgesio animacijos efektas */
 .stat-item::before {
     content: '';
     position: absolute;
@@ -618,7 +798,7 @@ footer::before {
 }
 
 .stat-item:hover::before {
-    left: 100%;
+    left: 100%; /* Judina blizgesį skersai */
 }
 
 .stat-item:hover {
@@ -632,6 +812,10 @@ footer::before {
     margin-bottom: 5px;
 }
 
+/* ----------------------------------------------------------------------------
+   KAINŲ LENTELĖS
+   Responsive lentelės su hover efektais ir specialiu paryškinimu
+   ---------------------------------------------------------------------------- */
 .lenteles-wrapper {
     margin: 40px 0;
     position: relative;
@@ -652,6 +836,7 @@ footer::before {
     overflow: hidden;
 }
 
+/* Gradient header su dekoratyvia linija */
 .kainu-lentele thead {
     background: var(--primary-gradient);
     color: var(--white);
@@ -682,6 +867,7 @@ footer::before {
     letter-spacing: 0.5px;
 }
 
+/* Eilutės hover efektas su z-index pakėlimu */
 .kainu-lentele tbody tr {
     transition: all var(--transition-fast);
     position: relative;
@@ -690,10 +876,11 @@ footer::before {
 .kainu-lentele tbody tr:hover {
     background-color: var(--bg-light);
     position: relative;
-    z-index: 5;
+    z-index: 5; /* Pakyla virš kitų eilučių */
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
+/* Kainos atvaizdavimas su ikona */
 .kaina-suma {
     font-weight: bold;
     color: var(--success-color);
@@ -707,15 +894,41 @@ footer::before {
     font-size: 18px;
 }
 
-/* Eilutės fonas – tik pataisytas kabliataškis */
-.highlight-row{
-  background-color:#fff3cd !important;
+/* Paryškinta VIP eilutė */
+.highlight-row {
+    background-color: #fff3cd !important;
 }
 
 .highlight-row:hover {
     background-color: #ffe69c !important;
 }
 
+/* VIP ženklelio ir pavadinimo išdėstymas */
+.kainu-lentele td.first-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: anywhere;
+}
+
+.badge-popular {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #e67e22;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
+}
+
+.vip-title {
+    font-weight: 600;
+}
+
+/* Palyginimo lentelė */
 .palyginimo-lentele {
     width: 100%;
     border-collapse: collapse;
@@ -752,6 +965,10 @@ footer::before {
     transform: scale(1.05);
 }
 
+/* ----------------------------------------------------------------------------
+   PASLAUGŲ INFO SEKCIJA
+   Sąrašai su custom stilizavimu ir ikonoms
+   ---------------------------------------------------------------------------- */
 .paslaugos-info {
     background: var(--light-overlay);
     padding: 30px;
@@ -783,6 +1000,7 @@ footer::before {
     margin-top: 0;
 }
 
+/* Privalumų sąrašas su varnelėmis */
 .privalumai-sarasas {
     list-style: none;
     padding-left: 0;
@@ -812,6 +1030,7 @@ footer::before {
     font-size: 20px;
 }
 
+/* Papildomų paslaugų sąrašas su numeruotais ženkleliais */
 .papildomos-sarasas {
     list-style-position: inside;
     padding-left: 0;
@@ -854,6 +1073,10 @@ footer::before {
     font-size: 12px;
 }
 
+/* ----------------------------------------------------------------------------
+   PROMO ELEMENTAI
+   Animuoti reklaminiai korteles su radial gradient efektu
+   ---------------------------------------------------------------------------- */
 .promo-item {
     background-color: rgba(255,255,255,0.1);
     padding: 20px;
@@ -865,6 +1088,7 @@ footer::before {
     overflow: hidden;
 }
 
+/* Radial švytėjimo efektas */
 .promo-item::before {
     content: '';
     position: absolute;
@@ -886,6 +1110,7 @@ footer::before {
     transform: scale(1.05) rotate(2deg);
 }
 
+/* Animuota ikona su bounce efektu */
 .promo-icon {
     font-size: 32px;
     margin-bottom: 10px;
@@ -903,6 +1128,10 @@ footer::before {
     margin-top: 5px;
 }
 
+/* ----------------------------------------------------------------------------
+   KONTAKTŲ PUSLAPIO ELEMENTAI
+   Kontaktinės info dėžutė ir formos
+   ---------------------------------------------------------------------------- */
 .kontaktai-info {
     background-color: var(--bg-light);
     padding: 20px;
@@ -910,6 +1139,7 @@ footer::before {
     position: relative;
 }
 
+/* Dekoratyvi vietos ikona */
 .kontaktai-info::before {
     content: '📍';
     position: absolute;
@@ -926,18 +1156,23 @@ footer::before {
     z-index: 1;
 }
 
+/* ----------------------------------------------------------------------------
+   UŽSAKYMO FORMA - CSS GRID
+   Dviejų skiltų formos išdėstymas su pilno pločio elementais
+   ---------------------------------------------------------------------------- */
 .uzsakymo-forma {
     background-color: var(--white);
     padding: 40px;
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-md);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Dvi vienodos skiltys */
     gap: 25px;
     align-items: start;
     position: relative;
 }
 
+/* Viršutinė akcentinė juosta naudojant ::before */
 .uzsakymo-forma::before {
     content: '';
     position: absolute;
@@ -949,8 +1184,9 @@ footer::before {
     border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
 }
 
+/* Pilno pločio formos elementai */
 .forma-grupe.full-width {
-    grid-column: 1 / -1;
+    grid-column: 1 / -1; /* Apima abi skiltis */
 }
 
 .forma-grupe {
@@ -958,6 +1194,7 @@ footer::before {
     position: relative;
 }
 
+/* Formos etiketės su rodyklės ikona */
 .forma-grupe label {
     display: block;
     margin-bottom: 8px;
@@ -975,6 +1212,7 @@ footer::before {
     font-size: 14px;
 }
 
+/* Formos įvesties laukai su focus efektais */
 .uzsakymo-forma input[type="text"],
 .uzsakymo-forma input[type="email"],
 .uzsakymo-forma input[type="tel"],
@@ -991,6 +1229,7 @@ footer::before {
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
+/* Focus būsena su rėmelio spalvos pasikeitimu ir pakėlimo efektu */
 .uzsakymo-forma input:focus,
 .uzsakymo-forma select:focus,
 .uzsakymo-forma textarea:focus {
@@ -1000,6 +1239,7 @@ footer::before {
     transform: translateY(-2px);
 }
 
+/* Radio ir checkbox grupės - Flexbox išdėstymas */
 .radio-grupe,
 .checkbox-grupe {
     display: flex;
@@ -1007,6 +1247,7 @@ footer::before {
     gap: 10px;
 }
 
+/* Stilizuotos radio/checkbox etiketės */
 .radio-label,
 .checkbox-label {
     display: flex;
@@ -1039,6 +1280,7 @@ footer::before {
     accent-color: var(--primary-color);
 }
 
+/* Range įvesties stilizavimas */
 input[type="range"] {
     width: calc(100% - 50px);
     margin-right: 10px;
@@ -1063,6 +1305,7 @@ input[type="range"]:hover::-webkit-slider-thumb {
     font-size: 18px;
 }
 
+/* Spalvos įvesties stilizavimas */
 input[type="color"] {
     width: 80px;
     height: 40px;
@@ -1076,6 +1319,10 @@ input[type="color"]:hover {
     transform: scale(1.1);
 }
 
+/* ----------------------------------------------------------------------------
+   FORMOS MYGTUKAI
+   Flexbox išdėstymas su gradient efektais ir animacijomis
+   ---------------------------------------------------------------------------- */
 .forma-mygtukai {
     display: flex;
     gap: 15px;
@@ -1095,6 +1342,7 @@ input[type="color"]:hover {
     overflow: hidden;
 }
 
+/* Ripple efektas naudojant ::before pseudo-elementą */
 .btn::before {
     content: '';
     position: absolute;
@@ -1133,6 +1381,10 @@ input[type="color"]:hover {
     transform: translateY(-3px);
 }
 
+/* ----------------------------------------------------------------------------
+   DUK BLOKAI
+   Stilizuoti klausimų/atsakymų blokai su dekoratyviniais elementais
+   ---------------------------------------------------------------------------- */
 .duk-blokas {
     background-color: rgba(255,255,255,0.1);
     padding: 18px;
@@ -1149,6 +1401,7 @@ input[type="color"]:hover {
     transform: translateX(5px);
 }
 
+/* Didelė dekoratyvi Q raidė */
 .duk-blokas::before {
     content: 'Q';
     position: absolute;
@@ -1169,44 +1422,182 @@ input[type="color"]:hover {
     font-weight: 600;
 }
 
+/* ----------------------------------------------------------------------------
+   MODAL LANGAS - NUOTRAUKŲ ŽIŪRIKLIS
+   Viso ekrano overlay su z-index: 9998-9999 aukščiausiam sluoksniui
+   Position: fixed viewport pozicionavimui
+   ---------------------------------------------------------------------------- */
+.img-clickable {
+    cursor: pointer;
+}
+
+/* Modal backdrop, z-index: 9998 */
+.modal-backdrop {
+    position: fixed; /* Fiksuotas į viewport */
+    inset: 0; /* Apima visą ekraną */
+    background: rgba(0,0,0,.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal-backdrop); /* Po modal, virš viso turinio - naudojant kintamąjį */
+    backdrop-filter: saturate(120%) blur(2px);
+}
+
+.modal-backdrop.show {
+    display: flex;
+}
+
+/* Modal konteineris, z-index: 9999 (aukščiausias sluoksnis) */
+.modal {
+    position: relative;
+    max-width: 92vw;
+    max-height: 88vh;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,.45);
+    z-index: var(--z-modal); /* Aukščiausias sluoksnis - naudojant kintamąjį */
+    background: #000;
+}
+
+.modal img {
+    display: block;
+    max-width: 92vw;
+    max-height: 70vh;
+    object-fit: contain;
+    background: #000;
+}
+
+/* Modal viršutinė juosta - Flexbox išdėstymas */
+.modal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #fff;
+}
+
+.modal-title {
+    font-weight: 600;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70vw;
+}
+
+.modal-close {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Like mygtukas su gradient fonu */
+.like-btn {
+    appearance: none;
+    border: 0;
+    border-radius: 9999px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: 700;
+    background: linear-gradient(135deg,#e74c3c,#ff7675);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(231,76,60,.35);
+    transform: translateZ(0);
+    transition: transform .2s;
+}
+
+.like-btn:active {
+    transform: scale(.96);
+}
+
+.like-count {
+    min-width: 28px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Focus būsena klaviatūros navigacijai */
+.galerija-item img,
+.portfolio-item img {
+    transition: transform .4s;
+}
+
+.open-photo.focused {
+    outline: 3px solid rgba(255,255,255,.35);
+    outline-offset: -3px;
+}
+
+/* Pašalinti nepageidaujamus pseudo-elementus */
+.lenteles-wrapper::before,
+.lenteles-wrapper::after,
+.paslaugos-info::before,
+.paslaugos-info::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* ----------------------------------------------------------------------------
+   RESPONSIVE DESIGN - MEDIA QUERIES
+   Mobile-first požiūris su breakpoint'ais 1600px, 1200px, 768px, 400px
+   Naudoja lankstų Grid/Flexbox išdėstymus ir clamp() fluid dydžiui
+   ---------------------------------------------------------------------------- */
+
+/* Didelis Desktop: 1600px ir žemiau */
 @media (max-width: 1600px) {
     .content-wrapper {
-        grid-template-columns: 1.3fr 3fr 1.3fr;
+        grid-template-columns: 1.3fr 3fr 1.3fr; /* Pakoreguotos proporcijos */
         gap: 28px;
         padding: 40px 50px;
     }
     
     .portfolio-galerija {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* 4 → 3 stulpeliai */
         gap: 20px;
     }
 }
 
+/* Tablet/Mažas Desktop: 1200px ir žemiau */
 @media (max-width: 1200px) {
+    /* Persijungia į vieno stulpelio išdėstymą */
     .content-wrapper {
         grid-template-columns: 1fr;
         gap: 24px;
         padding: 32px 24px;
     }
     
+    /* Pašalinti sticky pozicionavimą mažesniuose ekranuose */
     .sidebar-kaire,
     .sidebar-desine {
         position: static;
         top: auto;
     }
     
+    /* Pertvarkyti turinį: kairė sidebar → main → dešinė sidebar */
     .sidebar-kaire {
-        order: 1;
+        order: 2;
     }
     
     .main-content {
-        order: 2;
+        order: 1;
     }
     
     .sidebar-desine {
         order: 3;
     }
     
+    /* Išlaikyti dviejų stulpelių formą */
     .uzsakymo-forma {
         grid-template-columns: 1fr 1fr;
         gap: 20px;
@@ -1214,7 +1605,7 @@ input[type="color"]:hover {
     }
     
     .portfolio-galerija {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* 3 → 2 stulpeliai */
         gap: 16px;
     }
     
@@ -1223,6 +1614,7 @@ input[type="color"]:hover {
         gap: 16px;
     }
     
+    /* Sumažinti hero aukštį */
     .hero {
         height: 350px;
     }
@@ -1239,6 +1631,7 @@ input[type="color"]:hover {
         font-size: 32px;
     }
     
+    /* Įjungti horizontalų scroll lentelėms */
     .lenteles-wrapper {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -1250,11 +1643,13 @@ input[type="color"]:hover {
     }
 }
 
+/* Mobile: 768px ir žemiau */
 @media (max-width: 768px) {
     #pagrindinis-header {
         padding: 12px 0;
     }
     
+    /* Sudėlioti headerį vertikaliai */
     header {
         flex-direction: column;
         gap: 12px;
@@ -1266,6 +1661,7 @@ input[type="color"]:hover {
         text-align: center;
     }
     
+    /* Horizontalus scrollable meniu naudojant clamp() fluid dydžiui */
     .meniu {
         flex-direction: row;
         flex-wrap: nowrap;
@@ -1308,6 +1704,7 @@ input[type="color"]:hover {
         padding: 20px;
     }
     
+    /* Vieno stulpelio forma */
     .uzsakymo-forma {
         grid-template-columns: 1fr;
         padding: 24px 20px;
@@ -1318,6 +1715,7 @@ input[type="color"]:hover {
         grid-column: 1;
     }
     
+    /* Sudėlioti mygtukus vertikaliai */
     .forma-mygtukai {
         flex-direction: column;
         gap: 10px;
@@ -1328,6 +1726,7 @@ input[type="color"]:hover {
         padding: 14px 25px;
     }
     
+    /* Vieno stulpelio galerija */
     .portfolio-galerija {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -1362,6 +1761,7 @@ input[type="color"]:hover {
         padding: 20px;
     }
     
+    /* Responsive lentelės su fixed išdėstymu */
     .lenteles-wrapper {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -1431,6 +1831,7 @@ input[type="color"]:hover {
     }
 }
 
+/* Labai Mažas Mobile: 400px ir žemiau */
 @media (max-width: 400px) {
     .logo h1 {
         font-size: 13px;
@@ -1465,6 +1866,7 @@ input[type="color"]:hover {
         font-size: 13px;
     }
     
+    /* Itin responsive lentelių tvarkymas */
     .lenteles-wrapper {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -1478,125 +1880,74 @@ input[type="color"]:hover {
         font-size: 10px;
     }
 
-    /* Neberaižom žodžių po raides mažame ekrane */
+    /* Geresnis žodžių laužymas mažuose ekranuose */
     .kainu-lentele th,
     .kainu-lentele td,
     .palyginimo-lentele th,
     .palyginimo-lentele td {
-    white-space: normal;
-    word-break: normal;         /* vietoje break-word */
-    overflow-wrap: anywhere;    /* jei reikia, laužys tarp žodžių */
-    hyphens: auto;              /* jei ilgi žodžiai – skiemenuos */
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: anywhere;
+        hyphens: auto; /* Automatinis skiemenavimas */
     }
 
-    /* Pirmą kolonos ląstelę darom šiek tiek platesnę ir nelaužom žodžių viduje */
+    /* Pirmojo stulpelio minimalus plotis */
     .kainu-lentele th:first-child,
     .kainu-lentele td:first-child {
-    min-width: 120px;
-    word-break: keep-all;
+        min-width: 120px;
+        word-break: keep-all;
     }
     
     .rating-icon {
         font-size: 24px;
     }
 
-    .kainu-lentele tr.vip td:first-child { 
-        padding-left: 56px; 
+    .badge-popular {
+        top: 6px;
+        left: 10px;
+        font-size: 12px;
+        padding: 3px 6px;
     }
-    .badge-popular { 
-        top: 6px; 
-        left: 10px; 
-        font-size: 12px; 
-        padding: 3px 6px; 
+}
+
+/* VIP ženklelio išdėstymas mažuose ekranuose (600px ir žemiau) */
+@media (max-width: 600px) {
+    .kainu-lentele td.first-cell {
+        display: block; /* Sudėlioti vertikaliai */
+        white-space: normal;
     }
     
+    .badge-popular {
+        display: inline-block;
+        margin-bottom: 6px;
+    }
+    
+    .vip-title {
+        display: block;
+    }
 }
 
-.img-clickable{cursor:pointer}
-
-.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:9998;backdrop-filter:saturate(120%) blur(2px)}
-.modal-backdrop.show{display:flex}
-
-.modal{position:relative;max-width:92vw;max-height:88vh;border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.45);z-index:9999;background:#000}
-.modal img{display:block;max-width:92vw;max-height:70vh;object-fit:contain;background:#000}
-
-.modal-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:linear-gradient(135deg, #2c3e50 0%, #34495e 100%);color:#fff}
-.modal-title{font-weight:600;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70vw}
-.modal-close{appearance:none;border:0;background:transparent;color:#fff;font-size:22px;line-height:1;cursor:pointer;padding:4px 8px}
-.modal-actions{display:flex;align-items:center;gap:12px}
-
-.like-btn{appearance:none;border:0;border-radius:9999px;padding:10px 14px;cursor:pointer;font-weight:700;background:linear-gradient(135deg,#e74c3c,#ff7675);color:#fff;box-shadow:0 6px 18px rgba(231,76,60,.35);transform:translateZ(0);transition:transform .2s}
-.like-btn:active{transform:scale(.96)}
-.like-count{min-width:28px;text-align:center;font-variant-numeric:tabular-nums}
-
-.galerija-item img,
-.portfolio-item img{transition:transform .4s}
-.open-photo.focused{outline:3px solid rgba(255,255,255,.35);outline-offset:-3px}
-
-/* Pirmo stulpelio turinys – ženkliukas + pavadinimas */
-.kainu-lentele td.first-cell{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  white-space: nowrap;          /* venkime raidžių „kolonos“ */
-  word-break: normal;
-  overflow-wrap: anywhere;
-}
-
-/* Ženkliukas */
-.badge-popular{
-  display:inline-block;
-  padding: 4px 10px;
-  border-radius: 6px;
-  background:#e67e22;
-  color:#fff;
-  font-weight:700;
-  font-size:11px;
-  line-height:1;
-}
-
-/* Pavadinimas */
-.vip-title{ font-weight:600; }
-
-/* Mažame ekrane SUDĖTI vieną ant kito */
-@media (max-width: 600px){
-  .kainu-lentele td.first-cell{
-    display:block;              /* vertikali eiga */
-    white-space:normal;         /* leisti laužyti pagal žodžius */
-  }
-  .badge-popular{ display:inline-block; margin-bottom:6px; }
-  .vip-title{ display:block; }
-}
-
-.lenteles-wrapper::before,
-.lenteles-wrapper::after,
-.paslaugos-info::before,
-.paslaugos-info::after {
-  content: none !important;
-  display: none !important;
-}
-
+/* Papildomas VIP stilizavimas 650px ir žemiau */
 @media (max-width: 650px) {
-  .kainu-lentele td.first-cell {
-    display: block;
-    white-space: normal;
-    padding-top: 10px;         /* vietos viršuje */
-    padding-bottom: 10px;      /* vietos apačioje */
-  }
+    .kainu-lentele td.first-cell {
+        display: block;
+        white-space: normal;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 
-  .badge-popular {
-    display: inline-block;
-    margin-bottom: 6px;        /* tarpas tarp „POPULAR“ ir „VIP Paketas“ */
-    margin-right: 0;
-  }
+    .badge-popular {
+        display: inline-block;
+        margin-bottom: 6px;
+        margin-right: 0;
+    }
 
-  .vip-title {
-    display: block;
-    text-align: left;          /* arba „center“, jei nori sulygiuoti per vidurį */
-  }
+    .vip-title {
+        display: block;
+        text-align: left;
+    }
 }
 
-
-
-
-
+/* ============================================================================
+   STYLESHEET PABAIGA
+   ============================================================================ */

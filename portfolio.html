@@ -25,29 +25,71 @@
 
     <main class="content-wrapper">
         <aside class="sidebar-kaire">
-            <h3>Kategorijos</h3>
+            <h3>⭐ Atsiliepimai</h3>
             <div class="info-box">
-                <p>Čia rasite mano geriausius darbus pagal kategorijas.</p>
+                <p style="margin-bottom: 15px; font-size: 13px; color: #555;">Palikite savo atsiliepimą apie mūsų darbus!</p>
+                
+                <!-- Komentarų forma -->
+                <form id="atsiliepimas-forma" style="margin-bottom: 20px;">
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #667eea; font-size: 13px;">Vardas:</label>
+                        <input type="text" id="komentaro-vardas" required 
+                            style="width: 100%; padding: 8px; border: 2px solid #ecf0f1; border-radius: 6px; font-size: 13px;"
+                            placeholder="Jūsų vardas">
+                    </div>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #667eea; font-size: 13px;">Vertinimas:</label>
+                        <div id="rating-input" style="display: flex; gap: 5px; font-size: 24px; cursor: pointer;">
+                            <span class="star" data-rating="1">☆</span>
+                            <span class="star" data-rating="2">☆</span>
+                            <span class="star" data-rating="3">☆</span>
+                            <span class="star" data-rating="4">☆</span>
+                            <span class="star" data-rating="5">☆</span>
+                        </div>
+                        <input type="hidden" id="selected-rating" value="5">
+                    </div>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #667eea; font-size: 13px;">Atsiliepimas:</label>
+                        <textarea id="komentaro-tekstas" required rows="3"
+                            style="width: 100%; padding: 8px; border: 2px solid #ecf0f1; border-radius: 6px; font-size: 13px; resize: vertical;"
+                            placeholder="Jūsų atsiliepimas..."></textarea>
+                    </div>
+                    
+                    <button type="submit" 
+                        style="width: 100%; padding: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px; transition: transform 0.2s;">
+                        Paskelbti atsiliepimą
+                    </button>
+                </form>
+
+                <div style="height: 1px; background: #ecf0f1; margin: 20px 0;"></div>
+
+                <!-- Atsiliepimų sąrašas -->
+                <div id="atsiliepimai-sarasas" style="max-height: 500px; overflow-y: auto;">
+                    <!-- Atsiliepimai -->
+                </div>
             </div>
         </aside>
 
         <section class="main-content">
             <h2>Mano Portfolio</h2>
-            <p class="aprasymas">Kiekviena nuotrauka pasakoja savo unikalią istoriją....</p>
+            <p class="aprasymas">Kiekviena nuotrauka pasakoja savo unikalią istoriją. Čia rasite geriausius mano darbus iš įvairių fotosesijų - nuo vestuvių iki gamtos fotografijos. Visos nuotraukos redaguotos profesionaliomis programomis ir atspindi mano stilių bei požiūrį į fotografiją.</p>
 
             <div class="portfolio-galerija">
                 <div class="portfolio-item">
-                <img class="open-photo img-clickable"
-                    src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500"
-                    alt="Vestuvės 1"
-                    data-title="Jono ir Marijos akimirka"
-                    data-likes="12">
-                <span class="like-badge">0</span>
-                <span class="rating-icon">💍</span>
-                <div class="overlay">
-                    <h4>Vestuvės</h4>
-                    <p>Jono ir Marijos vestuvės</p>
-                </div>
+                    <img class="open-photo img-clickable"
+                        src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500"
+                        alt="Vestuvės 1"
+                        data-title="Jono ir Marijos akimirka"
+                        data-likes="12">
+                    <span class="like-badge">0</span>
+                    <span class="rating-icon">👍</span>
+                    <span class="watermark">© V.Petronis</span>
+                    <div class="overlay">
+                        <h4>Vestuvės</h4>
+                        <p>Jono ir Marijos vestuvės</p>
+                    </div>
                 </div>
 
                 <div class="portfolio-item">
@@ -58,21 +100,22 @@
                         data-likes="9">
                     <span class="like-badge">0</span>
                     <span class="rating-icon">❤️</span>
+                    <span class="watermark">© V.Petronis</span>
                     <div class="overlay">
                         <h4>Vestuvės</h4>
                         <p>Romantiškas momentas</p>
                     </div>
                 </div>
 
-
                 <div class="portfolio-item">
                     <img class="open-photo img-clickable" 
-                    src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500" 
-                    alt="Portretas 1"
-                    data-title="Verslo portretas"
-                    data-likes="15">
+                        src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500" 
+                        alt="Portretas 1"
+                        data-title="Verslo portretas"
+                        data-likes="15">
                     <span class="like-badge">0</span>
-                    <span class="rating-icon">👔</span>
+                    <span class="rating-icon">💼</span>
+                    <span class="watermark">© V.Petronis</span>
                     <div class="overlay">
                         <h4>Portretas</h4>
                         <p>Verslo portretas</p>
@@ -81,12 +124,13 @@
 
                 <div class="portfolio-item">
                     <img class="open-photo img-clickable"
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500" 
-                    alt="Portretas 2"
-                    data-title="Studijinis portretas"
-                    data-likes="8">
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500" 
+                        alt="Portretas 2"
+                        data-title="Studijinis portretas"
+                        data-likes="8">
                     <span class="like-badge">0</span>
                     <span class="rating-icon">📸</span>
+                    <span class="watermark">© V.Petronis</span>
                     <div class="overlay">
                         <h4>Portretas</h4>
                         <p>Studijinis portretas</p>
@@ -95,12 +139,13 @@
 
                 <div class="portfolio-item">
                     <img class="open-photo img-clickable"
-                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500" 
-                    alt="Gamta 1"
-                    data-title="Kalnų peizažas"
-                    data-likes="20">
+                        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500" 
+                        alt="Gamta 1"
+                        data-title="Kalnų peizažas"
+                        data-likes="20">
                     <span class="like-badge">0</span>
                     <span class="rating-icon">🏔️</span>
+                    <span class="watermark">© V.Petronis</span>
                     <div class="overlay">
                         <h4>Gamta</h4>
                         <p>Kalnų peizažas</p>
@@ -109,12 +154,13 @@
 
                 <div class="portfolio-item">
                     <img class="open-photo img-clickable"
-                    src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=500" 
-                    alt="Gamta 2"
-                    data-title="Saulėlydis prie jūros"
-                    data-likes="18">
+                        src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=500" 
+                        alt="Gamta 2"
+                        data-title="Saulėlydis prie jūros"
+                        data-likes="18">
                     <span class="like-badge">0</span>
                     <span class="rating-icon">🌅</span>
+                    <span class="watermark">© V.Petronis</span>
                     <div class="overlay">
                         <h4>Gamta</h4>
                         <p>Saulėlydis prie jūros</p>
@@ -123,12 +169,13 @@
 
                 <div class="portfolio-item">
                     <img class="open-photo img-clickable"
-                    src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=500" 
-                    alt="Festuvalis"
-                    data-title="Muzikos festivalis"
-                    data-likes="11">
+                        src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=500" 
+                        alt="Festuvalis"
+                        data-title="Muzikos festivalis"
+                        data-likes="11">
                     <span class="like-badge">0</span>
                     <span class="rating-icon">🎵</span>
+                    <span class="watermark">© V.Petronis</span>
                     <div class="overlay">
                         <h4>Renginiai</h4>
                         <p>Muzikos festivalis</p>
@@ -137,17 +184,23 @@
 
                 <div class="portfolio-item">
                     <img class="open-photo img-clickable"
-                    src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=500" 
-                    alt="Koncertas"
-                    data-title="Gyvas koncertas"
-                    data-likes="14">
+                        src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=500" 
+                        alt="Koncertas"
+                        data-title="Gyvas koncertas"
+                        data-likes="14">
                     <span class="like-badge">0</span>
                     <span class="rating-icon">🎤</span>
+                    <span class="watermark">© V.Petronis</span>
                     <div class="overlay">
                         <h4>Renginiai</h4>
                         <p>Koncertas</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="info-blokas" style="margin-top: 40px;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">💼 Norite Panašių Nuotraukų?</h3>
+                <p>Patiko ką matote? Susisiekite su mumis ir aptarkime jūsų projekto detales. Galime sukurti unikalų fotosesijos planą, pritaikytą būtent jūsų poreikiams ir vizijai.</p>
             </div>
         </section>
 
@@ -156,14 +209,31 @@
             <div class="stat-item">
                 <p class="stat-number">500+</p>
                 <p>fotosesijų</p>
+                <p style="font-size: 12px; margin-top: 5px; opacity: 0.8;">Per 10 metų karjerą</p>
             </div>
             <div class="stat-item">
                 <p class="stat-number">10</p>
                 <p>metų patirtis</p>
+                <p style="font-size: 12px; margin-top: 5px; opacity: 0.8;">Profesionalioje fotografijoje</p>
             </div>
             <div class="stat-item">
                 <p class="stat-number">100%</p>
                 <p>klientų pasitenkinimas</p>
+                <p style="font-size: 12px; margin-top: 5px; opacity: 0.8;">Pagal atsiliepimus</p>
+            </div>
+
+            <h3 style="margin-top: 30px;">📷 Įranga</h3>
+            <div style="background-color: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                <p style="font-weight: 600; margin-bottom: 5px;">Canon EOS R5</p>
+                <p style="font-size: 12px; opacity: 0.9;">Mirrorless fotoaparatas</p>
+            </div>
+            <div style="background-color: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                <p style="font-weight: 600; margin-bottom: 5px;">Sony A7 IV</p>
+                <p style="font-size: 12px; opacity: 0.9;">Backup kamera</p>
+            </div>
+            <div style="background-color: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                <p style="font-weight: 600; margin-bottom: 5px;">RF 24-70mm f/2.8</p>
+                <p style="font-size: 12px; opacity: 0.9;">Universalus objektyvas</p>
             </div>
         </aside>
     </main>
@@ -171,18 +241,21 @@
     <footer>
         <p>&copy; 2025 Vytauto Petronio Fotografija. Visos teisės saugomos.</p>
     </footer>
+
     <div class="modal-backdrop" id="photoModal">
-    <div class="modal">
-        <div class="modal-bar">
-        <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-actions">
-            <button class="like-btn" id="likeBtn">❤ <span class="like-count" id="likeCount">0</span></button>
-            <button class="modal-close" id="modalClose" aria-label="Uždaryti">✕</button>
-        </div>
-        </div>
-        <img id="modalImg" src="" alt="">
+        <div class="modal">
+            <div class="modal-bar">
+                <div class="modal-title" id="modalTitle"></div>
+                <div class="modal-actions">
+                    <button class="like-btn" id="likeBtn">❤ <span class="like-count" id="likeCount">0</span></button>
+                    <button class="modal-close" id="modalClose" aria-label="Uždaryti">✕</button>
+                </div>
+            </div>
+            <img id="modalImg" src="" alt="">
         </div>
     </div>
-<script src="js/gallery-heart-modal.js"></script>
+
+    <script src="js/gallery-heart-modal.js"></script>
+    <script src="js/atsiliepimai.js"></script>
 </body>
 </html>
