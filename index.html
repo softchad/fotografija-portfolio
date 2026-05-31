@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vytauto Petronio Fotografija</title>
+    <title>VP Fotografija</title>
+    
+    <!-- ========== PD3 PAPILDYMAS: Bootstrap 5.3 CSS biblioteka ========== -->
+    <!-- Bootstrap suteikia responsive grid sistemą, komponentus ir utility klases -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons - ikonų biblioteka -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- ================================================================== -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="pagrindinis-header">
         <header>
             <div class="logo">
-                <h1>Vytauto Petronio Fotografija</h1>
+                <h1>VP Fotografija</h1>
             </div>
             <nav>
                 <ul class="meniu">
@@ -18,6 +25,8 @@
                     <li><a href="portfolio.html">Portfolio</a></li>
                     <li><a href="paslaugos.html">Paslaugos</a></li>
                     <li><a href="kontaktai.html">Kontaktai</a></li>
+                    <li><a href="nustatymai.html">Nustatymai</a></li>
+                    <li><a href="zaidimas.html">Žaidimai</a></li>
                 </ul>
             </nav>
         </header>
@@ -32,7 +41,19 @@
 
     <main class="content-wrapper">
         <aside class="sidebar-kaire">
-            <h3>Apie Studiją</h3>
+            <h3>Kategorijos</h3>
+            <div class="info-box">
+                <p><strong>📸 Paslaugų tipai:</strong></p>
+                <ul class="simple-list">
+                    <li>Vestuvės</li>
+                    <li>Portretai</li>
+                    <li>Šeimos fotosesijos</li>
+                    <li>Renginiai</li>
+                    <li>Komercinė fotografija</li>
+                </ul>
+            </div>
+            
+            <h3 style="margin-top: 30px;">Kontaktai</h3>
             <div class="info-box">
                 <p><strong>📍 Buveinė:</strong></p>
                 <p>VIKO EIF</p>
@@ -48,19 +69,66 @@
 
         <section class="main-content">
             <h2>Apie Mane</h2>
-            <p class="aprasymas">Sveiki! Esu profesionalus fotografas Vytautas Petronis su <span class="akcentas">10 metų patirtimi</span>. Specializuojuosi vestuvių, portretų ir gamtos fotografijoje.</p>
+            <p class="aprasymas">Sveiki! Esu profesionalus fotografas su <span class="akcentas">10 metų patirtimi</span> fotografijos srityje. Specializuojuosi vestuvių, portretų ir gamtos fotografijoje, tačiau mielai priimame ir kitus užsakymus.</p>
             
             <div class="info-blokas">
-                <p>Kiekviena fotosesija man yra unikali istorija. Stengiuosi užfiksuoti natūralias emocijas ir sukurti nuotraukas, kurias norėsite saugoti amžinai.</p>
+                <p><strong>Mano filosofija:</strong> Kiekviena fotosesija man yra unikali istorija. Stengiuosi užfiksuoti natūralias emocijas ir sukurti nuotraukas, kurias norėsite saugoti amžinai. Naudoju profesionalią Canon ir Sony įrangą, o nuotraukas redaguoju naudodamas Adobe Lightroom ir Photoshop programas.</p>
             </div>
 
+            <h3>Kodėl pasirinkti mane?</h3>
+            <ul class="privalumai-sarasas">
+                <li><strong>Profesionali patirtis:</strong> Per 10 metų nufotografavau daugiau nei 500 renginių</li>
+                <li><strong>Šiuolaikinė įranga:</strong> Naudoju naujausios kartos fotoaparatus ir objektyvus</li>
+                <li><strong>Lankstus darbo grafikas:</strong> Dirbu savaitgaliais ir švenčių dienomis</li>
+                <li><strong>Greitas darbų perdavimas:</strong> Nuotraukas gausite per 2-3 savaites</li>
+                <li><strong>Neriboti pataisymai:</strong> Redaguoju nuotraukas iki 100% pasitenkinimo</li>
+            </ul>
+
+            <!-- ========== PD3 PAPILDYMAS: Bootstrap Card komponentai ========== -->
+            <!-- Pridėtas Bootstrap Card grid su responsive column sistema -->
+            <!-- Naudojamos Bootstrap utility klasės: mb-4, shadow-sm, h-100 -->
+            <div class="mt-5 mb-4">
+                <h3 class="mb-4">⭐ Mūsų Pasiekimai</h3>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body text-center">
+                                <i class="bi bi-trophy-fill text-warning" style="font-size: 3rem;"></i>
+                                <h5 class="card-title mt-3">Metų Fotografas</h5>
+                                <p class="card-text text-muted">Apdovanotas 2024 metais už išskirtinius darbus vestuvių fotografijoje</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body text-center">
+                                <i class="bi bi-people-fill text-primary" style="font-size: 3rem;"></i>
+                                <h5 class="card-title mt-3">500+ Klientų</h5>
+                                <p class="card-text text-muted">Patenkinti klientai iš visos Lietuvos ir užsienio</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body text-center">
+                                <i class="bi bi-star-fill text-success" style="font-size: 3rem;"></i>
+                                <h5 class="card-title mt-3">5.0 Įvertinimas</h5>
+                                <p class="card-text text-muted">Aukščiausias įvertinimas Google ir Facebook platformose</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ================================================================== -->
+
             <div class="mini-galerija">
-                <h3>Mūsų darbai</h3>
+                <h3>Mūsų Geriausių Darbų Pavyzdžiai</h3>
+                <p style="margin-bottom: 20px; color: #555;">Peržiūrėkite kelias nuotraukas iš mano portfolio. Kiekvienas projektas yra unikalus ir atspindi klientų individualumą.</p>
                 <div class="galerija-grid">
                     <a href="portfolio.html" class="galerija-item">
                         <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400"
                             alt="Vestuvės">
-                        <span class="rating-icon">💍</span>
+                        <span class="rating-icon">💑</span>
                         <p>Vestuvės</p>
                     </a>
 
@@ -80,23 +148,75 @@
                 </div>
             </div>
 
+            <!-- ========== PD3 PAPILDYMAS: Bootstrap Alert komponentas ========== -->
+            <!-- Alert komponentas su ikona ir stilizavimu -->
+            <div class="alert alert-info d-flex align-items-center mt-5 shadow-sm" role="alert">
+                <i class="bi bi-info-circle-fill me-3" style="font-size: 1.5rem;"></i>
+                <div>
+                    <h5 class="alert-heading mb-2">📞 Susisiekite Dabar</h5>
+                    <p class="mb-0">Norite užsakyti fotosesiją ar turite klausimų? Susisiekite telefonu arba užpildykite kontaktų formą puslapyje "Kontaktai". Atsakysiu per 24 valandas!</p>
+                </div>
             </div>
+            <!-- ================================================================== -->
         </section>
 
         <aside class="sidebar-desine">
             <h3>Specializacija</h3>
             <ul class="spec-list">
-                <li>Vestuvės</li>
-                <li>Portretai</li>
-                <li>Gamta</li>
-                <li>Renginiai</li>
+                <li>Vestuvės ir sužadėtuvės</li>
+                <li>Verslo portretai</li>
+                <li>Gamtos fotografija</li>
+                <li>Renginių fiksavimas</li>
+                <li>Produktų fotografija</li>
             </ul>
+
+            <h3 style="margin-top: 30px;">Statistika</h3>
+            <div class="stat-item">
+                <p class="stat-number">500+</p>
+                <p>fotosesijų</p>
+            </div>
+            <div class="stat-item">
+                <p class="stat-number">10</p>
+                <p>metų patirtis</p>
+            </div>
+            <div class="stat-item">
+                <p class="stat-number">100%</p>
+                <p>klientų pasitenkinimas</p>
+            </div>
+
+            <!-- ========== PD3 PAPILDYMAS: Bootstrap Badge komponentai ========== -->
+            <!-- Pridėti Bootstrap badge stiliai nuolaidoms -->
+            <h3 style="margin-top: 30px;">Nuolaidos</h3>
+            <div class="promo-item">
+                <p class="promo-icon">🎉</p>
+                <p>Ankstyvas užsakymas</p>
+                <span class="badge bg-success fs-5">-10%</span>
+                <p style="font-size: 12px; margin-top: 5px;">Užsakant 3 mėn. prieš</p>
+            </div>
+            <div class="promo-item">
+                <p class="promo-icon">💎</p>
+                <p>Pakartotinis klientas</p>
+                <span class="badge bg-primary fs-5">-15%</span>
+                <p style="font-size: 12px; margin-top: 5px;">Grįžtantiems klientams</p>
+            </div>
+            <div class="promo-item">
+                <p class="promo-icon">🎁</p>
+                <p>Rekomenduok draugui</p>
+                <span class="badge bg-warning text-dark fs-5">-20€</span>
+                <p style="font-size: 12px; margin-top: 5px;">Abu gaunate nuolaidą</p>
+            </div>
         </aside>
     </main>
 
     <footer>
-        <p>&copy; 2025 Vytauto Petronio Fotografija. Visos teisės saugomos.</p>
+        <p>&copy; 2026 VP Fotografija. Visos teisės saugomos.</p>
+        <p style="font-size: 12px; margin-top: 10px;">
+            <a href="#" id="privatumo-link-forma" style="color: rgba(255,255,255,0.8); text-decoration: underline;">Privatumo politika</a> 
+        </p>
     </footer>
-<script src="gallery-heart-modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/gallery-heart-modal.js"></script>
+    <script src="js/privatumo-politika.js"></script>
+    <script src="js/nustatymai.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
   var qsa = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
   var on  = function (el, ev, fn) { el.addEventListener(ev, fn, false); };
 
-  var MODAL_ID = 'photoModal';
+  var MODAL_ID = 'customPhotoModal';
   var SELECTOR_OPEN = 'img.open-photo';
   var SELECTOR_CARD = '.galerija-item, .portfolio-item';
   var LS_KEY = function (src) { return 'likes:' + src; };
@@ -15,10 +15,10 @@
     if (existing) return existing;
 
     var wrap = document.createElement('div');
-    wrap.className = 'modal-backdrop';
+    wrap.className = 'custom-modal-backdrop';
     wrap.id = MODAL_ID;
     wrap.innerHTML =
-      '<div class="modal">' +
+      '<div class="custom-modal">' +
         '<div class="modal-bar">' +
           '<div class="modal-title" id="modalTitle"></div>' +
           '<div class="modal-actions">' +

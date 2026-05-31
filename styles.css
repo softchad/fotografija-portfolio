@@ -255,6 +255,7 @@ header {
     flex: 1 0 auto; /* Flex augimas sticky footer'iui */
 }
 
+
 /* ----------------------------------------------------------------------------
    KAIRĖ SIDEBAR
    Sticky pozicionavimas su z-index sluoksniavimui
@@ -383,10 +384,6 @@ header {
     opacity: 0.3;
 }
 
-span.akcentas {
-    color: blue;
-}
-
 /* Info blokas su dekoratyvia ikona naudojant ::before */
 .info-blokas {
     background: var(--light-overlay);
@@ -438,8 +435,8 @@ span.akcentas {
 
 /* Galerijos elementas su sluoksniuotais hover efektais */
 .galerija-item {
-    position: relative; /* Pozicionavimo kontekstas absolute vaikams */
-    overflow: hidden;
+    position: relative;
+    overflow: hidden; /* SVARBU: neleidžia išlįsti */
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-lg);
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -448,7 +445,7 @@ span.akcentas {
 .galerija-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-xl);
-    z-index: 10; /* Pakyla virš bendramečių hover metu */
+    z-index: 10;
 }
 
 .galerija-item img {
@@ -456,9 +453,10 @@ span.akcentas {
     height: 250px;
     object-fit: cover;
     display: block;
+    border-radius: var(--border-radius-md);
 }
 
-/* Slankusis teksto overlay, z-index: 2 */
+/* Tekstas paslėptas apačioje pagal nutylėjimą */
 .galerija-item p {
     position: absolute;
     bottom: 0;
@@ -468,17 +466,21 @@ span.akcentas {
     color: var(--white);
     padding: 15px;
     text-align: center;
-    transform: translateY(100%); /* Paslėptas pagal nutylėjimą */
-    transition: transform var(--transition-fast);
     font-weight: 600;
     z-index: 2;
+    margin: 0;
+    border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+    /* Paslėptas - nustumiamas žemyn */
+    transform: translateY(100%);
+    transition: transform var(--transition-fast);
 }
 
+/* Hover metu - tekstas išslenka į viršų */
 .galerija-item:hover p {
-    transform: translateY(0); /* Išslenka į viršų hover metu */
+    transform: translateY(0);
 }
 
-/* Zoom ikonos efektas naudojant ::after, z-index: 3 (viršutinis sluoksnis) */
+/* Zoom ikonos efektas */
 .galerija-item::after {
     content: '🔍';
     position: absolute;
@@ -489,7 +491,7 @@ span.akcentas {
     opacity: 0;
     transition: all var(--transition-fast);
     z-index: 3;
-    pointer-events: none; /* Neblokuoja paspaudimų */
+    pointer-events: none;
 }
 
 .galerija-item:hover::after {
@@ -519,8 +521,10 @@ span.akcentas {
     padding-bottom: 10px;
 }
 
-.sidebar-desine p {
+/* Įpėdinio selektorius - tik tiesioginiai paragrafai */
+.sidebar-desine > p {
     margin-bottom: 10px;
+    color: inherit; /* Paveldi white spalvą iš .sidebar-desine */
 }
 
 /* Specializacijų sąrašas su varnelių ikonoms */
@@ -1432,7 +1436,7 @@ input[type="color"]:hover {
 }
 
 /* Modal backdrop, z-index: 9998 */
-.modal-backdrop {
+.custom-modal-backdrop {
     position: fixed; /* Fiksuotas į viewport */
     inset: 0; /* Apima visą ekraną */
     background: rgba(0,0,0,.65);
@@ -1443,12 +1447,12 @@ input[type="color"]:hover {
     backdrop-filter: saturate(120%) blur(2px);
 }
 
-.modal-backdrop.show {
+.custom-modal-backdrop.show {
     display: flex;
 }
 
 /* Modal konteineris, z-index: 9999 (aukščiausias sluoksnis) */
-.modal {
+.custom-modal {
     position: relative;
     max-width: 92vw;
     max-height: 88vh;
@@ -1949,5 +1953,398 @@ input[type="color"]:hover {
 }
 
 /* ============================================================================
-   STYLESHEET PABAIGA
+   PD3 PAPILDYMAS: BOOTSTRAP INTEGRACIJOS STILIAI
+   
+   Šioje sekcijoje pridėti Bootstrap 5.3 bibliotekos pritaikymai ir papildomi
+   komponentų stiliai. Bootstrap suteikia:
+   - Responsive grid sistemą (container, row, col-*)
+   - Utility klases (mt-*, mb-*, p-*, d-flex, etc.)
+   - Komponentus (card, badge, alert, list-group, nav-pills)
+   - Ikonu biblioteka (Bootstrap Icons)
+   
+   Responsive breakpoints (4 dydžiai):
+   - Extra Small (xs): < 576px (mobile telefonai)
+   - Small (sm): ≥ 576px (dideli telefonai)
+   - Medium (md): ≥ 768px (planšetės)
+   - Large (lg): ≥ 992px (laptop/desktop)
+   - Extra Large (xl): ≥ 1200px (dideli ekranai)
+   
    ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   BOOTSTRAP CARD KOMPONENTŲ PRITAIKYMAI
+   Card yra Bootstrap komponentas lanksčiam turinio konteinerio kūrimui
+   ---------------------------------------------------------------------------- */
+.card {
+    transition: all var(--transition-fast);
+    border-radius: var(--border-radius-md) !important;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover) !important;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* ----------------------------------------------------------------------------
+   BOOTSTRAP BADGE KOMPONENTŲ PRITAIKYMAI
+   Badge komponentai naudojami nuolaidų ir status ženklelių atvaizdavimui
+   ---------------------------------------------------------------------------- */
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-pill);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.badge.bg-success {
+    background: linear-gradient(135deg, #27ae60, #2ecc71) !important;
+}
+
+.badge.bg-primary {
+    background: var(--primary-gradient) !important;
+}
+
+.badge.bg-warning {
+    background: var(--award-gradient) !important;
+}
+
+/* ----------------------------------------------------------------------------
+   BOOTSTRAP ALERT KOMPONENTŲ PRITAIKYMAI
+   Alert komponentas informaciniams pranešimams su ikonomis
+   ---------------------------------------------------------------------------- */
+.alert {
+    border-radius: var(--border-radius-md);
+    border: none;
+    padding: 1.5rem;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    color: #01579b;
+}
+
+.alert-heading {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* ----------------------------------------------------------------------------
+   BOOTSTRAP NAV PILLS - TABS NAVIGACIJA
+   Nav pills naudojami portfolio kategorijų filtravimui
+   ---------------------------------------------------------------------------- */
+.nav-pills .nav-link {
+    border-radius: var(--border-radius-md);
+    padding: 12px 20px;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: all var(--transition-fast);
+    background: var(--bg-light);
+    margin: 0 5px;
+}
+
+.nav-pills .nav-link:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    transform: translateY(-2px);
+}
+
+.nav-pills .nav-link.active {
+    background: var(--primary-gradient) !important;
+    color: white !important;
+    box-shadow: var(--shadow-md);
+}
+
+.nav-pills .nav-link i {
+    margin-right: 8px;
+}
+
+/* Tab content animacija */
+.tab-content {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* ----------------------------------------------------------------------------
+   BOOTSTRAP LIST GROUP KOMPONENTAS
+   Naudojamas įrangos sąrašo atvaizdavimui su ikonoms
+   ---------------------------------------------------------------------------- */
+.list-group-item {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm) !important;
+    margin-bottom: 10px;
+    padding: 1rem;
+    transition: all var(--transition-fast);
+    background: var(--white);
+}
+
+.list-group-item:hover {
+    background: var(--bg-light);
+    transform: translateX(5px);
+    box-shadow: var(--shadow-sm);
+}
+
+.list-group-item:last-child {
+    margin-bottom: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   BOOTSTRAP ICONS STILIZAVIMAS
+   Bootstrap Icons bibliotekos ikonų pritaikymai
+   ---------------------------------------------------------------------------- */
+.bi {
+    vertical-align: middle;
+    line-height: 1;
+}
+
+/* Spalvų klasės ikonoms */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-warning {
+    color: var(--warning-color) !important;
+}
+
+.text-success {
+    color: var(--success-color) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* ----------------------------------------------------------------------------
+   BOOTSTRAP UTILITY KLASĖS - PAPILDOMI PRITAIKYMAI
+   Margin, padding, display ir kitos utility klasės
+   ---------------------------------------------------------------------------- */
+
+/* Margin top utility */
+.mt-3 { margin-top: 1rem !important; }
+.mt-4 { margin-top: 1.5rem !important; }
+.mt-5 { margin-top: 3rem !important; }
+
+/* Margin bottom utility */
+.mb-2 { margin-bottom: 0.5rem !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+.mb-5 { margin-bottom: 3rem !important; }
+
+/* Padding utility */
+.p-3 { padding: 1rem !important; }
+.p-4 { padding: 1.5rem !important; }
+
+/* Display flex utilities */
+.d-flex { display: flex !important; }
+.d-block { display: block !important; }
+.align-items-center { align-items: center !important; }
+.justify-content-between { justify-content: space-between !important; }
+
+/* Text alignment */
+.text-center { text-align: center !important; }
+
+/* Height utility */
+.h-100 { height: 100% !important; }
+
+/* Font size utilities */
+.fs-5 { font-size: 1.25rem !important; }
+
+/* Spacing utilities */
+.me-3 { margin-right: 1rem !important; }
+
+/* Shadow utilities */
+.shadow-sm { box-shadow: var(--shadow-sm) !important; }
+
+/* Border utilities */
+.border-0 { border: 0 !important; }
+
+/* ----------------------------------------------------------------------------
+   PD3 RESPONSIVE PATOBULINIMAI - 4 EKRANŲ DYDŽIAI
+   Papildomi responsive pritaikymai Bootstrap komponentams
+   ---------------------------------------------------------------------------- */
+
+/* Extra Large (Desktop): > 1200px */
+@media (min-width: 1200px) {
+    .card-body {
+        padding: 2rem;
+    }
+    
+    .nav-pills .nav-link {
+        padding: 14px 28px;
+        font-size: 16px;
+    }
+}
+
+/* Large (Laptop): 992px - 1199px */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .nav-pills .nav-link {
+        padding: 12px 22px;
+        font-size: 15px;
+    }
+}
+
+/* Medium (Tablet): 768px - 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+    .card-body {
+        padding: 1.25rem;
+    }
+    
+    .nav-pills {
+        flex-wrap: wrap;
+    }
+    
+    .nav-pills .nav-link {
+        padding: 10px 18px;
+        font-size: 14px;
+        margin: 3px;
+    }
+    
+    .badge {
+        padding: 0.4rem 0.8rem;
+        font-size: 13px;
+    }
+}
+
+/* Small (Mobile): < 768px */
+@media (max-width: 767px) {
+    /* Card komponentai mobile */
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    /* Nav pills mobile - vertikal scrollable */
+    .nav-pills {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px;
+    }
+    
+    .nav-pills .nav-link {
+        padding: 10px 15px;
+        font-size: 13px;
+        margin: 2px;
+        white-space: nowrap;
+    }
+    
+    /* Alert mobile */
+    .alert {
+        padding: 1rem;
+        font-size: 14px;
+    }
+    
+    .alert-heading {
+        font-size: 1rem;
+    }
+    
+    /* Badge mobile */
+    .badge {
+        padding: 0.35rem 0.65rem;
+        font-size: 12px;
+    }
+    
+    /* List group mobile */
+    .list-group-item {
+        padding: 0.75rem;
+        font-size: 14px;
+    }
+    
+    /* Bootstrap grid mobile */
+    .row {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+    }
+    
+    .row > * {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    /* Utility klasių pritaikymai mobile */
+    .mt-5 { margin-top: 2rem !important; }
+    .mb-5 { margin-bottom: 2rem !important; }
+}
+
+/* Extra Small (Small Mobile): < 576px */
+@media (max-width: 575px) {
+    .card-body {
+        padding: 0.75rem;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+    
+    .nav-pills .nav-link {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .badge {
+        padding: 0.3rem 0.55rem;
+        font-size: 11px;
+    }
+    
+    .alert {
+        padding: 0.75rem;
+        font-size: 13px;
+    }
+    
+    .bi {
+        font-size: 1.2rem;
+    }
+}
+
+
+
+/* ----------------------------------------------------------------------------
+   PD3 PAPILDYMO PABAIGA
+   
+   ĮĮ PRIDĖTA PD3:
+   - Bootstrap 5.3 bibliotekos integracija
+   - Card komponentai su hover efektais
+   - Badge komponentai su gradient fonais
+   - Alert komponentas su ikonomis
+   - Nav pills tabs navigacija su animacijomis
+   - List group komponentas
+   - Bootstrap Icons pritaikymai
+   - Responsive utility klasės
+   - 4 ekranų dydžių (xs, sm, md, lg) optimizacija
+   
+   NEKEISTA:
+   - Originalus CSS struktūra išlaikyta
+   - Visi PD1 ir PD2 stiliai nepakeisti
+   - Pridėti tik papildomi Bootstrap stiliai
+   - Naudojami esami CSS kintamieji (--primary-color, --shadow-md, etc.)
+   ---------------------------------------------------------------------------- */

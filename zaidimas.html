@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Žaidimai - VP Fotografija</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Žaidimų stiliai */
+        .game-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .game-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .game-header h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .level-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .level-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #ecf0f1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .level-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        /* Atminties žaidimas */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .memory-card.flipped {
+            background: white;
+            border: 2px solid #667eea;
+        }
+        
+        .memory-card.matched {
+            background: #27ae60;
+            cursor: default;
+        }
+        
+        /* Quiz žaidimas */
+        .quiz-question {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .quiz-option:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+        }
+        
+        .quiz-option.correct {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+        
+        .quiz-option.wrong {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+        
+        /* Reakcijos žaidimas */
+        .reaction-area {
+            width: 100%;
+            height: 300px;
+            background: #ecf0f1;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .reaction-area.waiting {
+            background: #e74c3c;
+        }
+        
+        .reaction-area.ready {
+            background: #27ae60;
+        }
+        
+        .game-stats {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .start-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div id="pagrindinis-header">
+        <header>
+            <div class="logo">
+                <h1>VP Fotografija</h1>
+            </div>
+            <nav>
+                <ul class="meniu">
+                    <li><a href="index.html">Pagrindinis</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="paslaugos.html">Paslaugos</a></li>
+                    <li><a href="kontaktai.html">Kontaktai</a></li>
+                    <li><a href="nustatymai.html">Nustatymai</a></li>
+                    <li><a href="zaidimas.html" class="active">Žaidimai</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <main class="content-wrapper">
+        <section class="main-content" style="grid-column: 1 / -1;">
+            
+            <!-- ŽAIDIMAS 1: Atminties korteles -->
+            <div class="game-container">
+                <div class="game-header">
+                    <h3>🎴 Fotografijos Atminties Žaidimas</h3>
+                    <p>Surask poreles su fotoaparatų ikonoms</p>
+                </div>
+                
+                <div class="level-buttons">
+                    <button class="level-btn active" data-game="memory" data-level="easy">Lengvas (4x2)</button>
+                    <button class="level-btn" data-game="memory" data-level="medium">Vidutinis (4x3)</button>
+                    <button class="level-btn" data-game="memory" data-level="hard">Sunkus (4x4)</button>
+                </div>
+                
+                <div class="game-stats" id="memoryStats">
+                    Ėjimai: 0 | Rasta porų: 0
+                </div>
+                
+                <div class="memory-grid" id="memoryGrid"></div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="start-btn" onclick="startMemoryGame()">Pradėti žaidimą</button>
+                </div>
+            </div>
+
+            <!-- ŽAIDIMAS 2: Quiz -->
+            <div class="game-container">
+                <div class="game-header">
+                    <h3>📸 Fotografijos Quiz</h3>
+                    <p>Patikrink savo žinias apie fotografiją</p>
+                </div>
+                
+                <div class="level-buttons">
+                    <button class="level-btn active" data-game="quiz" data-level="easy">Lengvas</button>
+                    <button class="level-btn" data-game="quiz" data-level="medium">Vidutinis</button>
+                    <button class="level-btn" data-game="quiz" data-level="hard">Sunkus</button>
+                </div>
+                
+                <div class="game-stats" id="quizStats">
+                    Taškai: 0 / 0
+                </div>
+                
+                <div id="quizContainer">
+                    <div style="text-align: center;">
+                        <button class="start-btn" onclick="startQuiz()">Pradėti Quiz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ŽAIDIMAS 3: Reakcijos testas -->
+            <div class="game-container">
+                <div class="game-header">
+                    <h3>⚡ Fotografo Reakcija</h3>
+                    <p>Nufotografuok momentą tinkamu laiku!</p>
+                </div>
+                
+                <div class="level-buttons">
+                    <button class="level-btn active" data-game="reaction" data-level="easy">Lengvas (1s)</button>
+                    <button class="level-btn" data-game="reaction" data-level="medium">Vidutinis (0.5s)</button>
+                    <button class="level-btn" data-game="reaction" data-level="hard">Sunkus (0.3s)</button>
+                </div>
+                
+                <div class="game-stats" id="reactionStats">
+                    Geriausias laikas: - | Bandymas: 0/5
+                </div>
+                
+                <div class="reaction-area" id="reactionArea">
+                    Spausk "Pradėti testą" žemiau
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="start-btn" onclick="startReactionTest()">Pradėti testą</button>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 VP Fotografija. Visos teisės saugomos.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/zaidimas.js"></script>
+    <script src="js/nustatymai.js"></script>
+</body>
+</html>

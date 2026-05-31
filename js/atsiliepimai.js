@@ -6,7 +6,7 @@
         {
             vardas: "Ieva & Tomas",
             rating: 5,
-            tekstas: "Nuostabi patirtis! Vytautas užfiksavo kiekvieną svarbią akimirką mūsų vestuvėse. Nuotraukos viršijo visus lūkesčius!",
+            tekstas: "Nuostabi patirtis! Fotografas užfiksavo kiekvieną svarbią akimirką mūsų vestuvėse. Nuotraukos viršijo visus lūkesčius!",
             data: "2024-12-15"
         },
         {
@@ -30,7 +30,7 @@
         {
             vardas: "Rūta",
             rating: 5,
-            tekstas: "Sužadėtuvių fotosesija buvo tiesiog fantastinė! Vytautas žino kaip sukurti jaukią atmosferą.",
+            tekstas: "Sužadėtuvių fotosesija buvo tiesiog fantastinė! Fotografas žino kaip sukurti jaukią atmosferą.",
             data: "2024-12-05"
         },
         {
@@ -42,7 +42,7 @@
         {
             vardas: "Greta",
             rating: 5,
-            tekstas: "Mėgstu gamtos nuotraukas! Vytautas turi unikalų matomą būdą užfiksuoti grožį.",
+            tekstas: "Mėgstu gamtos nuotraukas! Fotografas turi unikalų būdą užfiksuoti grožį.",
             data: "2024-10-22"
         },
         {
